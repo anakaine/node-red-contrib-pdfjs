@@ -2,7 +2,17 @@ A node to help extract text contents from a pdf. Uses the Mozilla library found 
 
 ## Inputs
 #### payload
-This node expects in the payload either a buffer object of a pdf file (loaded either through the file in node or generated through other means) or a file location for an absolute filename to a pdf. If the pdf object is not found in the payload it will then look for a pdf filename in the config
+Either a buffer object that corresponds to a pdf file or a filepath leading to a pdf file to be decoded.	
+
+## Config
+#### filename
+If a file path/object is not provided in the payload, A file path to a pdf file should be provided here to be decoded.
+
+#### Order text
+Check this option to force the text to be ordered top down using the y value if 'from top to bottom' is selected, or ordered left to right by it's x value if 'from left to right' is selected. If both options are selected, it will order from top to bottom, then left to right.
+
+#### Merge text with next text
+When inserting text into output payload array, if the previous text inserted has the same x value (are in the same column), or same y value (are in the same row), it will concatenate the string to be inserted with the previous string with a space instead.
 
 ## Outputs
 #### payload

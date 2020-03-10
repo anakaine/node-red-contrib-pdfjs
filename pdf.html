@@ -1,11 +1,26 @@
 <script type="text/x-red" data-template-name="pdf">
+	<div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span>Name</span></label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
     <div class="form-row">
         <label for="node-input-filename"><i class="fa fa-file"></i> <span>File Name</span></label>
         <input type="text" id="node-input-filename" placeholder="Location of the pdf">
     </div>
 	<div class="form-row">
-        <label for="node-input-name"><i class="fa fa-tag"></i> <span>Name</span></label>
-        <input type="text" id="node-input-name" placeholder="Name">
+        <input type="checkbox" id="node-input-sortByY" style="display:inline-block; width:auto; vertical-align: baseline">
+        <label for="node-input-sortByY" style="width: 70%;"> <span>Order text from top to bottom</span></label>
+    </div>
+	<div class="form-row">
+        <input type="checkbox" id="node-input-sortByX" style="display: inline-block; width: auto; vertical-align: baseline">
+        <label for="node-input-sortByX" style="width: 70%;"> <span>Order text from left to right</span></label>
+    </div>
+	<div class="form-row">
+        Merge text with next text in order if:<br/>
+        <label><span>&nbsp;</span></label><label for="node-input-combineColumn" style="width:auto;"> both are in same column:</label>
+        <input type="checkbox" id="node-input-combineColumn" style="display:inline-block; width:auto; vertical-align: baseline"><br/>
+        <label><span>&nbsp;</span></label><label for="node-input-combineRow" style="width:auto;">both are in same row:</label>
+        <input type="checkbox" id="node-input-combineRow" style="display:inline-block; width:auto; vertical-align:baseline"><br/>
     </div>
 </script>
 
@@ -14,8 +29,18 @@
 	<h3>Inputs</h3>
 	<dl class="message-properties">
         <dt class="optional">payload<span class="property-type">object | string</span></dt>
-        <dd>Either a buffer object that corresponds to a pdf file or a string for an absolute filename to a pdf. 
-			If the pdf object is not found in the payload it will then look for a pdf filename in the config</dd>
+        <dd>Either a buffer object that corresponds to a pdf file or a filepath leading to a pdf file to be decoded.</dd>
+    </dl>
+	<h3>Config</h3>
+	<dl class="message-properties">
+        <dt class="optional">filename<span class="property-type">string</span></dt>
+        <dd>If a file path/object is not provided in the payload, A file path to a pdf file should be provided here to be decoded</dd>
+		<dt class="optional">Order text<span class="property-type">boolean</span></dt>
+        <dd>Check this option to force the text to be ordered top down using the y value if 'from top to bottom' is selected, or ordered left to right by it's x value 
+			if 'from left to right' is selected. If both options are selected, it will order from top to bottom, then left to right.</dd>
+		<dt class="optional">Merge text with next text<span class="property-type">boolean</span></dt>
+        <dd>When inserting text into output payload array, if the previous text inserted has the same x value (are in the same column), or same y value (are in the same row), concatenate 
+		the string to be inserted with the previous string with a space instead.</dd>
     </dl>
     <h3>Outputs</h3>
     <dl class="message-properties">
@@ -52,6 +77,10 @@
         defaults: {
             name: {value:""},
             filename: {value:""},
+			sortByY: {value:false},
+			sortByX: {value:false},
+			combineColumn: {value:false},
+			combineRow: {value:false}
         },
         inputs:1,
         outputs:2,
