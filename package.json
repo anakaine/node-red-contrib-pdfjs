@@ -1,17 +1,17 @@
 {
-  "name": "node-red-contrib-pdfjs",
+  "name": "node-red-contrib-pdfjs-es5",
   "version": "0.0.1",
-  "description": "Node-RED node to extract pdf data using pdfjs",
+  "description": "Node-RED node to extract pdf data using pdfjs with ES5",
   "dependencies": {
     "pdfjs-dist": "^2.2.228"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/RedBackSpider/node-red-contrib-pdfjs.git"
+    "url": "https://github.com/anakaine/node-red-contrib-pdfjs.git"
   },
-  "author": "Jack Menjivar",
+  "author": "Jack Menjivar, Simon Webster",
   "license": "ISC",
-  "keywords": ["node-red", "pdf"],
+  "keywords": ["node-red", "pdf", "es5"],
   "node-red": {
     "nodes": {
       "pdf": "pdf.js"
